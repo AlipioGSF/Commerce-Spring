@@ -1,5 +1,6 @@
 package com.aprendendojava.springjava.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -7,9 +8,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Payment {
+@Table(name = "tb_payment")
+public class Payment implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Long id;

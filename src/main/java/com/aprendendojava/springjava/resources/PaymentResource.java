@@ -13,7 +13,7 @@ import com.aprendendojava.springjava.entities.Payment;
 import com.aprendendojava.springjava.services.PaymentService;
 
 @RestController
-@RequestMapping(value = "/Payments")
+@RequestMapping(value = "/payments")
 public class PaymentResource {
 	
 	@Autowired
