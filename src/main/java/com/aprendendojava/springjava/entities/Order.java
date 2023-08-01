@@ -101,6 +101,10 @@ public class Order implements Serializable{
 		this.payment = payment;
 	}
 	
+	public Double getTotal() {
+		return items.stream().map(x -> x.getSubTotal()).reduce(0.0, (a,b) -> a + b);
+	}
+	
 	
 	@Override
 	public int hashCode() {
