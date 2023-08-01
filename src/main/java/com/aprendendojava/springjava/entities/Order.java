@@ -2,7 +2,9 @@ package com.aprendendojava.springjava.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.aprendendojava.springjava.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,12 +33,12 @@ public class Order implements Serializable{
 	
 	private Integer orderStatus;
 	
-	@OneToOne
-	private Payment payment;
-	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Order() {
 	}
@@ -73,15 +75,7 @@ public class Order implements Serializable{
 			this.orderStatus = orderStatus.getCode();			
 		}
 	}
-	
-	public Payment getPayment() {
-		return payment;
-	}
-	
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-	
+
 	public User getClient() {
 		return client;
 	}
@@ -90,6 +84,10 @@ public class Order implements Serializable{
 		this.client = client;
 	}
 
+	public Set<OrderItem> getItems(){
+		return items;
+	}
+	
 	
 	@Override
 	public int hashCode() {

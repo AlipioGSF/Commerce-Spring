@@ -3,9 +3,8 @@ package com.aprendendojava.springjava.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +28,6 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 	
-	@JsonIgnore
 	@ManyToMany
 	private Set<Category> categories = new HashSet<>();
 	
@@ -94,6 +92,23 @@ public class Product implements Serializable {
 				this.categories.add(c);
 			}
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 	

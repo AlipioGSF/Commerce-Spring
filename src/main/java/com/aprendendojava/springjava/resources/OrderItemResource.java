@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aprendendojava.springjava.entities.Payment;
-import com.aprendendojava.springjava.services.PaymentService;
+import com.aprendendojava.springjava.entities.OrderItem;
+import com.aprendendojava.springjava.services.OrderItemService;
 
 @RestController
-@RequestMapping(value = "/payments")
-public class PaymentResource {
+@RequestMapping(value = "/orderitems")
+public class OrderItemResource {
 	
 	@Autowired
-	private PaymentService service;
+	private OrderItemService service;
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Payment>> findAll(){
-		List<Payment> list = service.findAll();
+	public ResponseEntity<List<OrderItem>> findAll(){
+		List<OrderItem> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Payment> findById(@PathVariable Long id){
-		Payment Payment = service.findById(id);
-		return ResponseEntity.ok().body(Payment);
+	public ResponseEntity<OrderItem> findById(@PathVariable Long id){
+		OrderItem OrderItem = service.findById(id);
+		return ResponseEntity.ok().body(OrderItem);
 	}
 	
 }
